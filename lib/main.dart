@@ -61,7 +61,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Pokemon> _pokemon = [];
+  List<dynamic> _pokemon = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 return ListTile(
                   leading: Image.network(imageUrl),
                   title: Text('$index'),
-                  subtitle: Text(_pokemon[index].name),
+                  subtitle: Text(_pokemon[index]['name']),
                 );
               }),
     );
