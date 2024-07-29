@@ -3,6 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hussain_mustafa_riverpod/controllers/home_page_controller.dart';
 import 'package:hussain_mustafa_riverpod/pages/page_data.dart';
 
+final homepagecontrollerProvider =
+    StateNotifierProvider<HomePageController, HomePageData>((ref) {
+  return HomePageController(
+    HomePageData.initial(),
+  );
+});
+
 class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({super.key});
 
@@ -27,7 +34,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     );
   }
 
-  _buildUI(BuildContext context) {
+  Widget _buildUI(
+    BuildContext context,
+  ) {
     return SafeArea(
       child: SingleChildScrollView(
         child: Container(
@@ -61,14 +70,18 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             ),
           ),
           SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.060,
+            height: MediaQuery.sizeOf(context).height * 0.60,
             child: ListView.builder(
-                itemCount: _homePageData.data?.results?.length ?? 0,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(index.toString()),
-                  );
-                }),
+              itemCount: _homePageData.data?.results?.length ??
+                  0, // Ensure it only prints numbers from 0 to 19
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(
+                    '$index', // Display the index
+                  ),
+                );
+              },
+            ),
           )
         ],
       ),

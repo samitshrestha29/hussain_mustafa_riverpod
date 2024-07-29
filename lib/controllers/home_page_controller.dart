@@ -44,10 +44,3 @@ class HomePageController extends StateNotifier<HomePageData> {
     } else {}
   }
 }
-
-final homepagecontrollerProvider =
-    StateNotifierProvider<HomePageController, HomePageData>((ref) {
-  return HomePageController(
-    HomePageData.initial(),
-  );
-});
