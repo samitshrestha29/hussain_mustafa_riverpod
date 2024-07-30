@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hussain_mustafa_riverpod/controllers/home_page_controller.dart';
+import 'package:hussain_mustafa_riverpod/models/pokemon.dart';
 import 'package:hussain_mustafa_riverpod/pages/page_data.dart';
+import 'package:hussain_mustafa_riverpod/widgets/pokemon_list_tile.dart';
 
 final homepagecontrollerProvider =
     StateNotifierProvider<HomePageController, HomePageData>((ref) {
@@ -72,14 +74,13 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.60,
             child: ListView.builder(
-              itemCount: _homePageData.data?.results?.length ??
-                  0, // Ensure it only prints numbers from 0 to 19
+              itemCount: _homePageData.data?.results?.length ?? 0,
               itemBuilder: (context, index) {
+                PokemonListResult pokemon = _homePageData.data!.results![index];
                 return ListTile(
-                  title: Text(
-                    '$index', // Display the index
-                  ),
-                );
+                    title: PokemonListTile(
+                  pokemonUrl: pokemon.url!,
+                ));
               },
             ),
           )
