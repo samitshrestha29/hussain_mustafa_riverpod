@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-class HttpService {
-  HttpService();
+class HTTPService {
+  HTTPService();
   final _dio = Dio();
   Future<Response?> get(String path) async {
     try {

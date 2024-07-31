@@ -12,7 +12,7 @@ void main() async {
 
 Future<void> _setupService() async {
   GetIt.instance.registerSingleton(
-    HttpService(),
+    HTTPService(),
   );
 }
 

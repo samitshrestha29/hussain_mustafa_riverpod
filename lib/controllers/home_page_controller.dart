@@ -19,11 +19,11 @@ import '../services/http_services.dart';
 
 class HomePageController extends StateNotifier<HomePageData> {
   final GetIt _getIt = GetIt.instance;
-  late HttpService _httpService;
+  late HTTPService _httpService;
   HomePageController(
     super._state,
   ) {
-    _httpService = _getIt.get<HttpService>();
+    _httpService = _getIt.get<HTTPService>();
     _setup();
   }
   Future<void> _setup() async {
