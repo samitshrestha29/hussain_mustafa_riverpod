@@ -20,8 +20,32 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
+  final ScrollController _allPokemonListScrollController = ScrollController();
   late HomePageController _homePageController;
   late HomePageData _homePageData;
+
+  @override
+  void initState() {
+    super.initState();
+    _allPokemonListScrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _allPokemonListScrollController.removeListener(_scrollListener);
+    _allPokemonListScrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_allPokemonListScrollController.offset >=
+            _allPokemonListScrollController.position.maxScrollExtent * 1 &&
+        !_allPokemonListScrollController.position.outOfRange) {
+      // print("Reached end of list");
+      _homePageController.loadData();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     _homePageController = ref.watch(homepagecontrollerProvider.notifier);
@@ -74,6 +98,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.60,
             child: ListView.builder(
+              controller: _allPokemonListScrollController,
               itemCount: _homePageData.data?.results?.length ?? 0,
               itemBuilder: (context, index) {
                 PokemonListResult pokemon = _homePageData.data!.results![index];
